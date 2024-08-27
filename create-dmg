@@ -47,6 +47,7 @@ function hdiutil_detach_retry() {
 		(( unmounting_attempts++ ))
 		echo "Sync to flush writes"
 		sync
+		sleep 120
 		hdiutil detach "$1"
 		exit_code=$?
 		(( exit_code ==  0 )) && break            # nothing goes wrong
