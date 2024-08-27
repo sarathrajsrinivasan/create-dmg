@@ -31,7 +31,7 @@ HDIUTIL_VERBOSITY=""
 SANDBOX_SAFE=0
 BLESS=0
 SKIP_JENKINS=0
-MAXIMUM_UNMOUNTING_ATTEMPTS=3
+MAXIMUM_UNMOUNTING_ATTEMPTS=5
 SIGNATURE=""
 NOTARIZE=""
 
@@ -45,7 +45,6 @@ function hdiutil_detach_retry() {
 	until
 		echo "Unmounting disk image..."
 		(( unmounting_attempts++ ))
-		sleep 300
 		hdiutil detach "$1"
 		exit_code=$?
 		(( exit_code ==  0 )) && break            # nothing goes wrong
@@ -55,7 +54,7 @@ function hdiutil_detach_retry() {
 	do
 		(( unmounting_attempts == MAXIMUM_UNMOUNTING_ATTEMPTS )) && exit 16  # patience exhausted, exit with code EBUSY
 		echo "Wait a moment..."
-		sleep $(( 1 * (2 ** unmounting_attempts) ))
+		sleep 60
 	done
 	unset unmounting_attempts
 }
