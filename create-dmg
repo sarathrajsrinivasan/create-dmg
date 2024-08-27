@@ -45,6 +45,7 @@ function hdiutil_detach_retry() {
 	until
 		echo "Unmounting disk image..."
 		(( unmounting_attempts++ ))
+		sleep 60
 		hdiutil detach "$1"
 		exit_code=$?
 		(( exit_code ==  0 )) && break            # nothing goes wrong
