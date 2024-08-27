@@ -54,7 +54,7 @@ function hdiutil_detach_retry() {
 	do
 		(( unmounting_attempts == MAXIMUM_UNMOUNTING_ATTEMPTS )) && exit 16  # patience exhausted, exit with code EBUSY
 		echo "Wait a moment..."
-		sleep $(( 1 * (2 ** unmounting_attempts) ))
+		sleep 60
 	done
 	unset unmounting_attempts
 }
