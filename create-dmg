@@ -50,6 +50,8 @@ function hdiutil_detach_retry() {
 		sleep 120
 		hdiutil detach "$1"
 		exit_code=$?
+		echo $exit_code
+		echo "---"
 		(( exit_code ==  0 )) && break            # nothing goes wrong
 		(( exit_code != 16 )) && exit $exit_code  # exit with the original exit code
 		# The above statement returns 1 if test failed (exit_code == 16).
