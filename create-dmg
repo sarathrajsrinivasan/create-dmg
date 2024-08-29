@@ -381,13 +381,14 @@ if [[ $SANDBOX_SAFE -eq 0 ]]; then
 		FILESYSTEM_ARGUMENTS="-c c=64,a=16,e=16"
 	fi
 	echo "hdiutil create starts here"
-  echo ${HDIUTIL_VERBOSITY}
-  echo ${SRC_FOLDER}
-	echo ${VOLUME_NAME}
-  echo ${FILESYSTEM}
-  echo ${FILESYSTEM_ARGUMENTS}
-  echo ${CUSTOM_SIZE}
-	echo ${DMG_TEMP_NAME}
+	echo "hdiutil create starts here"
+  echo "HDIUTIL_VERBOSITY: ${HDIUTIL_VERBOSITY}"
+  echo "SRC_FOLDER : ${SRC_FOLDER}"
+  echo "VOLUME_NAME: ${VOLUME_NAME}"
+  echo "FILESYSTEM: ${FILESYSTEM}"
+  echo "FILESYSTEM_ARGUMENTS: ${FILESYSTEM_ARGUMENTS}"
+  echo "CUSTOM_SIZE: ${CUSTOM_SIZE}"
+	echo "DMG_TEMP_NAME: ${DMG_TEMP_NAME}"
 	hdiutil create ${HDIUTIL_VERBOSITY} -srcfolder "$SRC_FOLDER" -volname "${VOLUME_NAME}" \
 		-fs "${FILESYSTEM}" -fsargs "${FILESYSTEM_ARGUMENTS}" -format UDRW ${CUSTOM_SIZE} "${DMG_TEMP_NAME}"
 else
